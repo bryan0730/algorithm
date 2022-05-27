@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 elements to &apos;algorithm/src/dfs&apos;&#x0D;&#x0A;- Original project: &apos;algorithm&apos;&#x0D;&#x0A;- Destination element: &apos;algorithm/src/dfs&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     bfs.DFSExam.java&#x0D;&#x0A;     bfs.DFSExam3.java&#x0D;&#x0A;     bfs.DFSExam2.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;dfs" element1="/src&lt;bfs{DFSExam.java" element2="/src&lt;bfs{DFSExam3.java" element3="/src&lt;bfs{DFSExam2.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1653485774232" units="3" version="1.0"/>
+</session>
