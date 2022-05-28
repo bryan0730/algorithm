@@ -16,7 +16,7 @@ public class DFSExam5 {
 	
 	public static void main(String[] args) throws IOException {
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
+		 
 		M = Integer.parseInt(st.nextToken());
 		N = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());

@@ -9,6 +9,7 @@ public class DFSExam2 {
 	static int N,E;
 	static int[][] Graph = new int[MAX_N][MAX_N];
 	static boolean[] Visited = new boolean[MAX_N];
+	private static Scanner sc;
 	
 	static void dfs(int node) {
 		Visited[node] = true;
@@ -45,7 +46,7 @@ public class DFSExam2 {
 	}
 	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		
 		N = sc.nextInt();
 		E = sc.nextInt();
