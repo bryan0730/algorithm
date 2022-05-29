@@ -2,7 +2,9 @@ package programmers;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 public class CodingTest {
 
@@ -65,12 +67,110 @@ public class CodingTest {
         
         return answer;
     }
-	
-    public static void main(String[] args) {
-		int[] lottos = {44, 1, 0, 0, 31, 25};
-		int[] win_nums = {31, 10, 45, 1, 6, 19}; 
-		
-		int ab  = 0;
-		solution(lottos, win_nums);
+    
+    //https://programmers.co.kr/learn/courses/30/lessons/12924
+    public static int solution(int n) {
+    	int answer = 0;
+        
+        for(int i=1; i<=n; i++) {
+            int sum = 0;
+            for(int j=i; j<=n; j++) {
+                sum += j;
+                
+                if(sum==n) {
+                    answer++;
+                    break;
+                } else if(sum>n) {
+                    break;
+                }
+            }
+        }      
+        return answer;
+    }
+    
+    //https://programmers.co.kr/learn/courses/30/lessons/42583
+    public static int solution(int bridge_length, int weight, int[] truck_weights) {
+
+        Queue<Integer> q = new LinkedList<>();
+        int sum = 0;
+        int time = 0;
+        for(int i=0; i<truck_weights.length; i++) {
+        	while(true) {
+        		int truck = truck_weights[i];
+        		if(q.isEmpty()) {
+        			q.add(truck);
+            		sum += truck;
+            		time++;
+            		break;
+        		}else if(q.size()==bridge_length) {
+        			sum -= q.poll();
+        			
+        		}else{
+        			if(sum+truck <= weight) {
+        				q.add(truck);
+            			sum+=truck;
+            			time++;
+            			break;
+        			}else {
+        				q.add(0);
+        				time++;
+        			}
+        		}
+        	}
+        }
+        
+        return time + bridge_length;
+    }
+    
+    /*
+     * 타겟 넘버(못풀었다 어렵다)
+     * https://programmers.co.kr/learn/courses/30/lessons/43165?language=java 
+     */
+    public int solution(int[] numbers, int target) {
+        int answer = 0;
+        return answer;
+    }
+    
+    
+    
+    //https://programmers.co.kr/learn/courses/30/lessons/42839
+    boolean[] visited;
+    HashSet<Integer> set = new HashSet<>();
+    public int solution(String numbers) {
+		visited = new boolean[numbers.length()];
+		dfs(numbers, 0, "");
+		return set.size();
 	}
+    
+    public void dfs(String numbers, int depth, String current) {
+    	if(depth == numbers.length()) return;
+    	
+    	
+    	
+    	for(int i=0; i<numbers.length(); i++) {
+    		if(!visited[i]) {
+    			visited[i] = true;
+    			String number = current + numbers.charAt(i);
+    			
+    			if(isCheck(number)) {
+    				int num = Integer.parseInt(number);
+    				set.add(num);
+    			}
+    			dfs(numbers, depth+1, number);
+    			visited[i] = false;
+    		}
+    	}
+    }
+    
+    private boolean isCheck(String number) {
+    	
+    	int num = Integer.parseInt(number);
+    	
+    	for(int i=2; i*i<=num; i++) {
+    		if(num%i==0) return false;
+    	}
+    	if(num <= 1) return false;
+    	
+    	return true;
+    }
 }
