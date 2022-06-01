@@ -1,5 +1,7 @@
 package programmers;
 
+import java.util.Stack;
+
 public class CodingTest2 {
 
 	//https://programmers.co.kr/learn/courses/30/lessons/81301
@@ -52,5 +54,74 @@ public class CodingTest2 {
 			}
 		}	
 		return sb.toString();
+    }
+	
+	public String solution2(int[] numbers, String hand) {
+		String result = "";
+		int lloc = 10;
+		int rloc = 12;
+		int[][] arr = {{0,0},{0,1},{0,2},
+					   {1,0},{1,1},{1,2},
+					   {2,0},{2,1},{2,2},
+					   {3,0},{3,1},{3,2}};
+		
+		for(int i=0; i<numbers.length; i++) {
+			int number = numbers[i];
+			if(number%3==1) {
+				result += "L";
+				lloc = number;
+			}else if(number%3==0){
+				result += "R";
+				rloc = number;
+			}else {
+				if(number==0) number+=11;
+				
+				int ldis = Math.abs(arr[lloc-1][0]-arr[number-1][0]) + Math.abs(arr[lloc-1][1]-arr[number-1][1]);
+				int rdis = Math.abs(arr[rloc-1][0]-arr[number-1][0]) + Math.abs(arr[rloc-1][1]-arr[number-1][1]);
+				if(ldis==rdis) {
+					if(hand.equals("right")) {
+						result += "R";
+						rloc = number;
+					}else {
+						result += "L";
+						lloc = number;
+					}
+				}else if(ldis>rdis) {
+					result += "R";
+					rloc = number;
+				}else {
+					result += "L";
+					lloc = number;
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/64061
+	public int solution(int[][] board, int[] moves) {
+		
+        int answer = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        for(int i=0; i<moves.length; i++) {
+        	int move = moves[i];
+        	for(int j=0; j<board.length; j++) {
+        		int doll = board[j][move-1];
+        		if(doll!=0) {
+        			if(stack.peek()==doll) {
+        				stack.pop();
+        				answer++;
+        			}else {
+        				stack.push(doll);
+        				
+        			}
+        			board[j][move-1] = 0;
+        			break;
+        		}
+        	}
+        }
+        return answer*2;
     }
 }
