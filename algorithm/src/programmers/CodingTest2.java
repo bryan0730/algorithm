@@ -1,5 +1,10 @@
 package programmers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public class CodingTest2 {
@@ -124,4 +129,72 @@ public class CodingTest2 {
         }
         return answer*2;
     }
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/12977?language=java
+	public int solution(int[] nums) {
+        int answer = 0;
+
+        for(int i=0; i<nums.length-2; i++) {
+        	for(int j=i+1; j<nums.length-1; j++) {
+        		for(int k=j+1; k<nums.length; k++) {
+        			int sum = nums[i]+nums[j]+nums[k];
+        			if(isCheck(sum)) {
+        				answer++;
+        			}
+        		}
+        	}
+        }
+
+        return answer;
+    }
+	
+	private boolean isCheck(int number) {
+		
+		if(number <= 1) return false;
+		
+		for(int i=2; i*i<=number; i++) {
+			if(number%i==0) return false;
+		}
+		
+		return true;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/42576
+	public String solution(String[] participant, String[] completion) {
+		String answer = "";
+		Map<String, Integer> map = new HashMap<>();
+		for(String name : participant) {
+			map.put(name, map.getOrDefault(name, 0)+1);
+		}
+		
+		for(String name : completion) {
+			map.put(name, map.get(name)-1);
+		}
+		
+		for(String key : map.keySet()) {
+			if(map.get(key)!=0) {
+				answer = key;
+			}
+		}
+		
+		return answer;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/42748
+	public int[] solution(int[] array, int[][] commands) {
+		int[] answer = new int[commands.length];
+		for(int i=0; i<commands.length; i++) {
+			List<Integer> list = new ArrayList<>();
+			for(int j=commands[i][0]-1; j<commands[i][1]; j++) {
+				list.add(array[j]);
+				
+			}
+			Collections.sort(list);
+			answer[i] = list.get(commands[i][2]-1);
+		}
+		
+		return answer;
+	}
+	
+
 }
