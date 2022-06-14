@@ -1,8 +1,10 @@
 package programmers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -196,5 +198,110 @@ public class CodingTest2 {
 		return answer;
 	}
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/42840
+	 public static int[] solutions(int[] answers) {
+		 
+		 int[] first = {1,2,3,4,5};
+	     int[] second = {2,1,2,3,2,4,2,5};
+	     int[] third = {3,3,1,1,2,2,4,4,5,5};
+	     
+	     int[] score = {0,0,0};
+	     
+	     for(int i=0; i<answers.length; i++) {
+	    	 if(first[i%5]==answers[i]) score[0]++;
+	    	 if(second[i%8]==answers[i]) score[1]++;
+	         if(third[i%10]==answers[i]) score[2]++;
+	     }
+	     
+	     int maxScore = Math.max(score[0], Math.max(score[1], score[2]));
+	     List<Integer> list = new ArrayList<>();
+	     
+	     for(int i=0; i<score.length; i++) {
+	    	 if(maxScore==score[i]) list.add(i+1);
+	     }
+		 int[] result = new int[list.size()];
+	     for(int i=0; i<result.length; i++) {
+	    	 result[i] = list.get(i);
+	     }
+		 return result;
+	 }
+	 
+	 //정확도 66점 다시풀어야 함
+	 //https://programmers.co.kr/learn/courses/30/lessons/42862
+	 public int solution(int n, int[] lost, int[] reserve) {
+	        Arrays.sort(lost);
+	        Arrays.sort(reserve);
+	        int answer = 0;
+	        boolean[] visited = new boolean[reserve.length];
+	        int pos = n-lost.length;
+	        
+	        for(int i=0; i<lost.length; i++){
+	            int los = lost[i];
+	            for(int j=0; j<reserve.length; j++){
+	               if(visited[j]) continue;
+	                if(reserve[j]-1 == los || reserve[j]+1 == los){
+	                	visited[i] = true;
+	                    answer++;
+	                    break;
+	                }
+	            }
+	        }
+	        
+	        return answer+pos;
+	    }
+	 
+	//https://programmers.co.kr/learn/courses/30/lessons/1845
+	public int solution2(int[] nums) {
+		 
+		HashSet<Integer> set = new HashSet<>();
+		 for(int p : nums) {
+			 set.add(p);
+		 }
+		 
+		 int choice = nums.length/2;
+		 
+		 if(set.size()>=choice) 
+			 return choice;
+		 else 
+			 return set.size();
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/42889?language=java
+	public int[] solution(int N, int[] stages) {
+        
+		int[] answer = new int[N];
+        Map<Integer, Double> map = new HashMap<>();
+		
+		for(int i=1; i<=N; i++) {
+			double nonClear = 0;
+	        double arrive = 0;
+			for(int j=0; j<stages.length; j++) {
+				if(i<=stages[j]) arrive++;
+				if(i==stages[j]) nonClear++;
+			}
+			
+			if(arrive != 0)
+				map.put(i, nonClear/arrive);
+			else
+				map.put(i, 0.0);
+		}
+        
+		for(int i=0; i<N; i++) {
+			
+			double max = -1;
+			int maxKey = 0;
+			
+			for(int key : map.keySet()) {
+				if(max<map.get(key)) {
+					max= map.get(key);
+					maxKey = key;
+				}
+			}
+			answer[i] = maxKey;
+			map.remove(maxKey);
+		}
+		
+        return answer;
+    }
 
 }
