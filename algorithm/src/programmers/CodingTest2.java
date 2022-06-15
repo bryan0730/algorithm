@@ -285,7 +285,7 @@ public class CodingTest2 {
 			else
 				map.put(i, 0.0);
 		}
-        
+
 		for(int i=0; i<N; i++) {
 			
 			double max = -1;
@@ -303,5 +303,6 @@ public class CodingTest2 {
 		
         return answer;
     }
+	
 
 }
