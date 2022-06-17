@@ -3,7 +3,9 @@ package programmers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CodingTest3 {
 
@@ -78,11 +80,54 @@ public class CodingTest3 {
         return answer;
     }
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/12901
+	public static String solution2(int a, int b) {
+		
+		String answer = "";
+		String[] week = {"FIR", "SAT", "SUN", "MON", "TUE", "WED", "THU"};
+		int[] days = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		int day = 0;
+		for(int i=0; i<a-1; i++) {
+			day += days[i];
+		}
+		day += (b-1);
+		
+        answer = week[day%7];
+        
+        return answer;
+    }
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/42888
+	public String[] solution(String[] record) {
+        
+        Map<String, String> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
+        
+        for(int i=0; i<record.length; i++){
+        	String[] arr = record[i].split(" ");
+            	if(arr.length==3) map.put(arr[1],arr[2]);
+        }
+        
+        for(int i=0; i<record.length; i++){
+        	String[] arr = record[i].split(" ");
+            if(arr[0].equals("Enter")){
+            	list.add(map.get(arr[1])+"´ÔÀÌ µé¾î¿Ô½À´Ï´Ù.");
+            }else if(arr[0].equals("Leave")){
+            	list.add(map.get(arr[1])+"´ÔÀÌ ³ª°¬½À´Ï´Ù.");
+            }
+        }
+        String[] answer = new String[list.size()];
+        for(int i=0; i<list.size(); i++){
+        	answer[i] = list.get(i);
+        }
+        return answer;
+    }
+	
 	
 	
 	public static void main(String[] args) {
-		int n = 45;
-		String a = Integer.toString(n, 3);
-		System.out.println(a);
+		int a = 5;
+		int b = 24;
+		System.out.println(solution2(a, b));
 	}
 }
