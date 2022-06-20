@@ -97,6 +97,39 @@ public class CodingTest3 {
         return answer;
     }
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/86491
+	public int solution(int[][] sizes) {
+		
+		int answer = 0;
+		int maxX = 0;
+		int maxY = 0;
+		for(int i=0; i<sizes.length; i++) {
+			int x = Math.max(sizes[i][0], sizes[i][1]);
+			int y = Math.min(sizes[i][0], sizes[i][1]);
+			maxX = Math.max(maxX, x);
+			maxY = Math.max(maxY, y);
+		}
+		answer = maxX * maxY;
+		
+		return answer;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/82612
+	public static long solution(int price, int money, int count) {
+		
+		long answer = 0;
+		long sum = 0;
+		
+		for(int i=1; i<=count; i++) {
+			sum += price*i;
+		}
+		System.out.println(sum);
+		answer = sum - price;
+		
+		return answer;
+	}
+	
+	
 	//https://programmers.co.kr/learn/courses/30/lessons/42888
 	public String[] solution(String[] record) {
         
@@ -126,8 +159,9 @@ public class CodingTest3 {
 	
 	
 	public static void main(String[] args) {
-		int a = 5;
-		int b = 24;
-		System.out.println(solution2(a, b));
+		int price = 3;
+		int money = 20;
+		int count = 4;
+		System.out.println(solution(price, money, count));
 	}
 }
