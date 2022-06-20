@@ -123,8 +123,12 @@ public class CodingTest3 {
 		for(int i=1; i<=count; i++) {
 			sum += price*i;
 		}
-		System.out.println(sum);
-		answer = sum - price;
+		
+		if(sum>money) {
+			answer = sum - money;
+		}else {
+			answer = 0;
+		}
 		
 		return answer;
 	}
