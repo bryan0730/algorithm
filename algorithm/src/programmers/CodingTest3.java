@@ -191,7 +191,7 @@ public class CodingTest3 {
 			}else if(arr[i]=='T') {
 				score[round] *= score[round]*score[round];
 			}else if(arr[i]=='*') {
-				if(round==1) {
+				if(round==0) {
 					score[round] *=2;
 				}else {
 					score[round-1] *=2;
