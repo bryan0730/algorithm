@@ -124,15 +124,86 @@ public class CodingTest3 {
 			sum += price*i;
 		}
 		
-		if(sum>money) {
-			answer = sum - money;
-		}else {
-			answer = 0;
-		}
+		if(sum>money) answer = sum - money;
+		else answer = 0;
 		
 		return answer;
 	}
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/17681
+	//테스트 케이스 2개 실패 아래 메소드로 바꿈
+	public String[] solution(int n, int[] arr1, int[] arr2) {
+		
+        String[] map = new String[n];
+        
+        for(int i=0; i<arr1.length; i++) {
+        	String a = String.format("%0"+n+"d", Integer.parseInt(Integer.toBinaryString(arr1[i]).toString()));
+        	String b = String.format("%0"+n+"d", Integer.parseInt(Integer.toBinaryString(arr2[i]).toString()));
+        
+        	String pic = "";
+        	for(int j=0; j<n; j++) {
+        		char aa = a.charAt(j);
+        		char bb = b.charAt(j);
+
+        		if(aa=='1' || bb=='1') pic += "#";
+        		else if(aa=='0' && bb=='0') pic += " ";
+        	}
+        	map[i] = pic;
+        }
+        
+        return map;
+    }
+	public String[] solution2(int n, int[] arr1, int[] arr2) {
+		
+		String[] answer = new String[n];
+		for(int i=0; i<n; i++) {
+			answer[i] = Integer.toBinaryString(arr1[i] | arr2[i]);
+			answer[i] = answer[i].replace('0', ' ');
+			answer[i] = answer[i].replace('1', '#');
+			
+			while(answer[i].length() < n) {
+				answer[i] = ' ' + answer[i];
+			}
+		}
+		return answer;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/17682
+	public static int solution(String dartResult) {
+		
+		int answer = 0;
+		int round = -1;
+		int[] score = new int[3];
+		char[] arr = dartResult.toCharArray();
+		
+		for(int i=0; i<arr.length; i++) {
+			
+			if(arr[i] >='0' && arr[i] <='9') {
+				round++;
+				if(arr[i]=='1' && arr[i+1]=='0') {
+					i++;
+					score[round] = 10;
+				}else {
+					score[round] = arr[i] - '0';
+				}
+			}else if(arr[i]=='D') {
+				score[round] *= score[round];
+			}else if(arr[i]=='T') {
+				score[round] *= score[round]*score[round];
+			}else if(arr[i]=='*') {
+				if(round==1) {
+					score[round] *=2;
+				}else {
+					score[round-1] *=2;
+					score[round] *=2;
+				}
+			}else if(arr[i]=='#') {
+				score[round]*=-1;
+			}
+		}
+		answer = score[0]+score[1]+score[2];
+        return answer;
+    }
 	
 	//https://programmers.co.kr/learn/courses/30/lessons/42888
 	public String[] solution(String[] record) {
@@ -163,9 +234,13 @@ public class CodingTest3 {
 	
 	
 	public static void main(String[] args) {
-		int price = 3;
-		int money = 20;
-		int count = 4;
-		System.out.println(solution(price, money, count));
+//		int price = 3;
+//		int money = 20;
+//		int count = 4;
+//		System.out.println(solution(price, money, count));
+		
+		String dartResult = "1S2D*3T";
+		
+		System.out.println(solution(dartResult));
 	}
 }
