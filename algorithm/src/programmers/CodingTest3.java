@@ -3,9 +3,11 @@ package programmers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class CodingTest3 {
 
@@ -81,7 +83,7 @@ public class CodingTest3 {
     }
 	
 	//https://programmers.co.kr/learn/courses/30/lessons/12901
-	public static String solution2(int a, int b) {
+	public String solution2(int a, int b) {
 		
 		String answer = "";
 		String[] week = {"FIR", "SAT", "SUN", "MON", "TUE", "WED", "THU"};
@@ -115,7 +117,7 @@ public class CodingTest3 {
 	}
 	
 	//https://programmers.co.kr/learn/courses/30/lessons/82612
-	public static long solution(int price, int money, int count) {
+	public long solution(int price, int money, int count) {
 		
 		long answer = 0;
 		long sum = 0;
@@ -169,7 +171,7 @@ public class CodingTest3 {
 	}
 	
 	//https://programmers.co.kr/learn/courses/30/lessons/17682
-	public static int solution(String dartResult) {
+	public int solution(String dartResult) {
 		
 		int answer = 0;
 		int round = -1;
@@ -205,6 +207,44 @@ public class CodingTest3 {
         return answer;
     }
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/12906
+	public int[] solution2(int[] arr) {
+		
+		Stack<Integer> stack = new Stack<>();
+		for(int i=0; i<arr.length; i++) {
+			
+			if(stack.isEmpty()) stack.push(arr[i]);
+			else if(stack.peek() != arr[i]) {
+				stack.push(arr[i]);
+			}
+		}
+		
+		int[] answer = new int[stack.size()];
+		for(int i=0; i<stack.size(); i++) {
+			answer[i] = stack.get(i);
+		}
+		
+		return answer;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/12910
+	public int[] solution2(int[] arr, int divisor) {
+		
+		List<Integer> list = new ArrayList<>();
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i]%divisor==0) list.add(arr[i]);
+		}
+		if(list.isEmpty()) list.add(-1);
+		Collections.sort(list);
+		
+		int[] answer = new int[list.size()];
+		for(int i=0; i<answer.length; i++) {
+			answer[i] = list.get(i);
+		}
+		
+		return answer;
+	}
+	
 	//https://programmers.co.kr/learn/courses/30/lessons/42888
 	public String[] solution(String[] record) {
         
@@ -231,16 +271,39 @@ public class CodingTest3 {
         return answer;
     }
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/12915
+	public String[] solution(String[] strings, int n) {
+		
+		String[] answer = new String[strings.length];
+		List<String> list = new ArrayList<>();
+		for(int i=0; i<strings.length; i++) {
+			list.add(strings[i].charAt(n) + strings[i]);
+		}
+		Collections.sort(list);
+		
+		for(int i=0; i<answer.length; i++) {
+			answer[i] = list.get(i).substring(1);
+		}
+		
+		return answer;
+	}
+	public String[] solution2(String[] strings, int n) {
+		
+		Arrays.sort(strings, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				if(o1.charAt(n) > o2.charAt(n)) return 1;
+				else if(o1.charAt(n) < o2.charAt(n)) return -1;
+				else return 0;
+			}
+		});
+		
+		return strings;
+	}
 	
 	
 	public static void main(String[] args) {
-//		int price = 3;
-//		int money = 20;
-//		int count = 4;
-//		System.out.println(solution(price, money, count));
 		
-		String dartResult = "1S2D*3T";
-		
-		System.out.println(solution(dartResult));
 	}
 }
