@@ -1,4 +1,4 @@
-package programmers;
+package programmers.lv1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -245,32 +245,6 @@ public class CodingTest3 {
 		return answer;
 	}
 	
-	//https://programmers.co.kr/learn/courses/30/lessons/42888
-	public String[] solution(String[] record) {
-        
-        Map<String, String> map = new HashMap<>();
-        List<String> list = new ArrayList<>();
-        
-        for(int i=0; i<record.length; i++){
-        	String[] arr = record[i].split(" ");
-            	if(arr.length==3) map.put(arr[1],arr[2]);
-        }
-        
-        for(int i=0; i<record.length; i++){
-        	String[] arr = record[i].split(" ");
-            if(arr[0].equals("Enter")){
-            	list.add(map.get(arr[1])+"´ÔÀÌ µé¾î¿Ô½À´Ï´Ù.");
-            }else if(arr[0].equals("Leave")){
-            	list.add(map.get(arr[1])+"´ÔÀÌ ³ª°¬½À´Ï´Ù.");
-            }
-        }
-        String[] answer = new String[list.size()];
-        for(int i=0; i<list.size(); i++){
-        	answer[i] = list.get(i);
-        }
-        return answer;
-    }
-	
 	//https://programmers.co.kr/learn/courses/30/lessons/12915
 	public String[] solution(String[] strings, int n) {
 		
@@ -302,8 +276,49 @@ public class CodingTest3 {
 		return strings;
 	}
 	
+	//https://programmers.co.kr/learn/courses/30/lessons/12917
+	public String solution2(String s) {
+		
+		char[] ar = s.toCharArray();
+		Arrays.sort(ar);
+		StringBuilder sb = new StringBuilder(new String(ar));
+		String answer = sb.reverse().toString();
+		
+		return answer;
+	}
+	
+	//https://programmers.co.kr/learn/courses/30/lessons/42888
+	public String[] solution(String[] record) {
+        
+        Map<String, String> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
+        
+        for(int i=0; i<record.length; i++){
+        	String[] arr = record[i].split(" ");
+            	if(arr.length==3) map.put(arr[1],arr[2]);
+        }
+        
+        for(int i=0; i<record.length; i++){
+        	String[] arr = record[i].split(" ");
+            if(arr[0].equals("Enter")){
+            	list.add(map.get(arr[1])+"´ÔÀÌ µé¾î¿Ô½À´Ï´Ù.");
+            }else if(arr[0].equals("Leave")){
+            	list.add(map.get(arr[1])+"´ÔÀÌ ³ª°¬½À´Ï´Ù.");
+            }
+        }
+        String[] answer = new String[list.size()];
+        for(int i=0; i<list.size(); i++){
+        	answer[i] = list.get(i);
+        }
+        return answer;
+    }
+	
+	
+	
 	
 	public static void main(String[] args) {
 		
+		String s = "Zbcdefg";
+//		System.out.println(Arrays.toString(solution3(s)));
 	}
 }
