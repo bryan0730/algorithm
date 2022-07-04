@@ -1,4 +1,4 @@
-package programmers.lv2;
+package programmers.lv2.sol1;
 
 import java.util.Arrays;
 
