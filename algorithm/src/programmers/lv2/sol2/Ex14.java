@@ -9,8 +9,6 @@ public class Ex14 {
 	//https://school.programmers.co.kr/learn/courses/30/lessons/17677
 	public static int solution(String str1, String str2) {
 		
-		int answer = 0;
-		
 		List<String> strList1 = new ArrayList<>();
 		List<String> strList2 = new ArrayList<>();
 		List<String> gyoZip = new ArrayList<>();
